@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "212017232345",
+    "project_id": "qr-code-generator-3b78a",
+    "storage_bucket": "qr-code-generator-3b78a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212017232345:android:12c8b77efc2c97951401c8",
+        "android_client_info": {
+          "package_name": "com.asifrezan.qrcodegenerator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212017232345-q96q92s1fosr5ilnb7mggd0r589fr3d2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLbHPpedLCRNS1nEFUdVChst7fByHzYGY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212017232345-q96q92s1fosr5ilnb7mggd0r589fr3d2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

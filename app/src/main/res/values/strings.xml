@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">QR Code Genarator</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <color name="edit_text_background_color">#F2F2F2</color>
+    <color name="primary_color">#007AFF</color>
+
+
+    <dimen name="edit_text_padding_left">16dp</dimen>
+    <dimen name="edit_text_padding_right">16dp</dimen>
+    <dimen name="edit_text_padding_top">12dp</dimen>
+    <dimen name="edit_text_padding_bottom">12dp</dimen>
+
+
+    <dimen name="premium_edit_text_corner_radius">8dp</dimen>
+    <dimen name="premium_edit_text_padding_horizontal">16dp</dimen>
+    <dimen name="premium_edit_text_padding_vertical">12dp</dimen>
+
+
+</resources>
+
+

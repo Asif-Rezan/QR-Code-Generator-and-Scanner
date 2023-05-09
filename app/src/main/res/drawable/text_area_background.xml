@@ -1,0 +1,13 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="@color/premium_edit_text_background_color" />
+    <corners android:radius="@dimen/premium_edit_text_corner_radius" />
+
+    <padding
+        android:left="@dimen/premium_edit_text_padding_horizontal"
+        android:right="@dimen/premium_edit_text_padding_horizontal"
+        android:top="@dimen/premium_edit_text_padding_vertical"
+        android:bottom="@dimen/premium_edit_text_padding_vertical" />
+
+</shape>

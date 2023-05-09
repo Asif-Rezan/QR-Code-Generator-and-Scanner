@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/homeFregment">
+
+    <fragment
+        android:id="@+id/homeFregment"
+        android:name="com.asifrezan.qrcodegenerator.HomeFregment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home_fregment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.asifrezan.qrcodegenerator.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.asifrezan.qrcodegenerator.TodoFragment"
+        android:label="Task"
+        tools:layout="@layout/fragment_todo" />
+</navigation>
