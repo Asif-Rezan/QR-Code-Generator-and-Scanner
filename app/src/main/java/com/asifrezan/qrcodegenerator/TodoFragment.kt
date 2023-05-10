@@ -1,8 +1,16 @@
 package com.asifrezan.qrcodegenerator
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +19,17 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.asifrezan.qrcodegenerator.data.MyData
 import com.asifrezan.qrcodegenerator.db.DBHelper
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import java.io.File
+import java.io.FileOutputStream
 import java.time.LocalDateTime
 
 
@@ -48,12 +61,15 @@ class TodoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        createNotificationChannel()
+
         val view = inflater.inflate(R.layout.fragment_todo, container, false)
         val imageView = view.findViewById<ImageView>(R.id.image_view)
         val button = view.findViewById<Button>(R.id.button)
         val editText = view.findViewById<EditText>(R.id.editText)
         val titleEditText = view.findViewById<EditText>(R.id.titleEditText)
-       // val downloadButton = view.findViewById<Button>(R.id.downloadButton)
+        val downloadButton = view.findViewById<Button>(R.id.downloadButton)
 
         button.setOnClickListener {
             val contents =  editText.text.toString()
@@ -94,55 +110,92 @@ class TodoFragment : Fragment() {
         }
         }
 
-      //  downloadButton.setOnClickListener {
 
+        downloadButton.setOnClickListener(View.OnClickListener {
 
-//            try {
-//                val bitmap = (imageView.drawable as BitmapDrawable).bitmap
-//                val filename = "QRCode.png"
-//                val file = File(context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename)
-//                val fOut = FileOutputStream(file)
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut)
-//                fOut.flush()
-//                fOut.close()
-//                val uri = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID + ".provider", file)
-//                val intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
-//                intent.addCategory(Intent.CATEGORY_OPENABLE)
-//                intent.type = "image/png"
-//                intent.putExtra(Intent.EXTRA_TITLE, filename)
-//                intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, uri)
-//                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-//                startActivity(intent)
-//
-//
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//                Toast.makeText(context, "Failed to download QR code", Toast.LENGTH_SHORT).show()
-//            }
-  //      }
+            val bitmap = takeScreenshot(imageView)
+            saveScreenshot(bitmap)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        })
 
 
 
 
         return view
     }
+
+
+
+    private fun takeScreenshot(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    private fun saveScreenshot(bitmap: Bitmap) {
+        val fileName = "screenshot_${System.currentTimeMillis()}.png"
+        val dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/Screenshots/"
+        val dir = File(dirPath)
+        if (!dir.exists()) {
+            dir.mkdirs()
+        }
+        val file = File(dirPath, fileName)
+        val outputStream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        outputStream.flush()
+        showNotification()
+        Toast.makeText(requireContext(),"Download complited", Toast.LENGTH_SHORT).show()
+        outputStream.close()
+        MediaScannerConnection.scanFile(requireContext(), arrayOf(file.toString()), arrayOf("image/jpeg"), null)
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Downloads"
+            val descriptionText = "Download completed"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("download_channel", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun showNotification() {
+        val intent = Intent(Intent.ACTION_VIEW)
+
+        val pendingIntent = PendingIntent.getActivity(
+            requireContext(),
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        val builder = NotificationCompat.Builder(requireContext(), "download_channel")
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle("Download completed")
+            .setContentText("Your file has been downloaded successfully")
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+        val notificationManager: NotificationManagerCompat = NotificationManagerCompat.from(requireContext())
+        notificationManager.notify(1, builder.build())
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
