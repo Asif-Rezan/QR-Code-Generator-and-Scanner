@@ -1,35 +1,42 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333">
+    android:background="@drawable/background3">
 
-    <ImageView
-        android:id="@+id/image_view"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="40dp"
-        android:background="#EEEEEE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="@dimen/_300sdp"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#2DFFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/image_view"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/premium_edit_text_background"
         android:hint="Enter Title"
         android:maxLength="30"
         android:maxLines="1"
         android:padding="15dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textColorHint="#BEBEBE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
@@ -42,16 +49,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/image_view"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/premium_edit_text_background"
         android:hint="Enter Text"
         android:inputType="textMultiLine"
         android:maxLines="10"
         android:minLines="3"
         android:padding="16dp"
-        android:scrollbarStyle="insideInset"
-        android:scrollbars="vertical"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
 
         android:textColorHint="#BEBEBE"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +75,7 @@
         android:padding="0dp"
         android:text="Generate QR Code"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -87,6 +92,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

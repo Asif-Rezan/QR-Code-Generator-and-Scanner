@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -36,6 +37,7 @@ import java.time.LocalDateTime
 class TodoFragment : Fragment() {
 
     private var myData: MyData? = null
+    lateinit var bitmap: Bitmap
 
     companion object {
         private const val ARG_ID = "arg_id"
@@ -100,7 +102,7 @@ class TodoFragment : Fragment() {
 
             try {
                 val barcodeEncoder = BarcodeEncoder()
-                val bitmap: Bitmap = barcodeEncoder.encodeBitmap(contents, format, 200, 200)
+                bitmap = barcodeEncoder.encodeBitmap(contents, format, 1000, 1000)
                 imageView.setImageBitmap(bitmap)
             } catch (e: WriterException) {
                 e.printStackTrace()
@@ -113,7 +115,7 @@ class TodoFragment : Fragment() {
 
         downloadButton.setOnClickListener(View.OnClickListener {
 
-            val bitmap = takeScreenshot(imageView)
+         //   val bitmap = takeScreenshot(imageView)
             saveScreenshot(bitmap)
 
         })
@@ -134,8 +136,8 @@ class TodoFragment : Fragment() {
     }
 
     private fun saveScreenshot(bitmap: Bitmap) {
-        val fileName = "screenshot_${System.currentTimeMillis()}.png"
-        val dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/Screenshots/"
+        val fileName = "qr_${System.currentTimeMillis()}.png"
+        val dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/Qrcode/"
         val dir = File(dirPath)
         if (!dir.exists()) {
             dir.mkdirs()
@@ -144,7 +146,7 @@ class TodoFragment : Fragment() {
         val outputStream = FileOutputStream(file)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
         outputStream.flush()
-        showNotification()
+        showNotification(fileName)
         Toast.makeText(requireContext(),"Download complited", Toast.LENGTH_SHORT).show()
         outputStream.close()
         MediaScannerConnection.scanFile(requireContext(), arrayOf(file.toString()), arrayOf("image/jpeg"), null)
@@ -164,8 +166,28 @@ class TodoFragment : Fragment() {
         }
     }
 
-    private fun showNotification() {
+    private fun showNotification(fileName: String) {
+//        val file = File(Environment.getExternalStorageDirectory(), fileName)
+//        val filePath = file.absolutePath
+
+        val dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString() + "/Qrcode/"
+
+      //  val fileName = System.currentTimeMillis().toString() + ".png"
+        val filePath = "$dirPath$fileName"
+
+        // ... create the intent that opens the gallery app ...
+
+        val file = File(filePath)
+        val contentUri = FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.fileprovider",
+            file
+        )
+
         val intent = Intent(Intent.ACTION_VIEW)
+        intent.setDataAndType(contentUri, "image/jpeg")
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
 
         val pendingIntent = PendingIntent.getActivity(
             requireContext(),

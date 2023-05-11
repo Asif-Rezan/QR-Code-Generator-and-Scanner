@@ -15,5 +15,9 @@
     <color name="textColor">#212121</color>
     <color name="backgroundColor">#FFFFFF</color>
 
+    <color name="statusBar">#65009688</color>
+    <color name="bottomNav">#03524A</color>
+
+
     <color name="premium_edit_text_background_color">#F3F3F3</color>
 </resources>
