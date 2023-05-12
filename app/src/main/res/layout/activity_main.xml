@@ -31,6 +31,7 @@
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationBarId"
+                app:itemIconSize="@dimen/_20sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -43,6 +44,11 @@
                 app:menu="@menu/bottom_nav_menu"
 
                />
+
+
+
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

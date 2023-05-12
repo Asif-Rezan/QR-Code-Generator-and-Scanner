@@ -11,7 +11,7 @@
         android:layout_margin="8dp"
         app:cardElevation="4dp"
         card_view:cardCornerRadius="8dp"
-        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardBackgroundColor="@color/listItemBackground"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
 
@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title"
-                android:textColor="#000"
+                android:textColor="#E3FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/titleTextView"
                 android:text="Date"
-                android:textColor="#555"
+                android:textColor="#E0EFEDED"
                 android:textSize="14sp"
                 android:alpha="0.5"/>
 

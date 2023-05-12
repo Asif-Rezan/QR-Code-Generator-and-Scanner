@@ -3,6 +3,7 @@ package com.asifrezan.qrcodegenerator
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -38,6 +39,7 @@ class TodoFragment : Fragment() {
 
     private var myData: MyData? = null
     lateinit var bitmap: Bitmap
+    lateinit var ratingButton : ImageView
 
     companion object {
         private const val ARG_ID = "arg_id"
@@ -71,7 +73,9 @@ class TodoFragment : Fragment() {
         val button = view.findViewById<Button>(R.id.button)
         val editText = view.findViewById<EditText>(R.id.editText)
         val titleEditText = view.findViewById<EditText>(R.id.titleEditText)
-        val downloadButton = view.findViewById<Button>(R.id.downloadButton)
+        val ratingButton = view.findViewById<ImageView>(R.id.ratingButton)
+        val downloadButton = view.findViewById<ImageView>(R.id.downloadButton)
+        val shareButton = view.findViewById<ImageView>(R.id.shareButton)
 
         button.setOnClickListener {
             val contents =  editText.text.toString()
@@ -118,6 +122,42 @@ class TodoFragment : Fragment() {
          //   val bitmap = takeScreenshot(imageView)
             saveScreenshot(bitmap)
 
+        })
+
+        ratingButton.setOnClickListener(View.OnClickListener {
+
+            val packageName = "com.asifrezan.qrcodegenerator"
+            val playStoreUri = Uri.parse("market://details?id=$packageName")
+            val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
+            playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+            try {
+                startActivity(playStoreIntent)
+            }
+            catch (e: ActivityNotFoundException) {
+                val webPlayStoreUri = Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+                val webPlayStoreIntent = Intent(Intent.ACTION_VIEW, webPlayStoreUri)
+                startActivity(webPlayStoreIntent)
+            }
+
+
+        })
+
+
+        shareButton.setOnClickListener(View.OnClickListener {
+            val file = File(requireContext().externalCacheDir, "image.png")
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
+
+// Create the intent to share the image
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "image/png"
+            val uri = FileProvider.getUriForFile(requireContext(), "${BuildConfig.APPLICATION_ID}.fileprovider", file)
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+
+// Show the share sheet
+            startActivity(Intent.createChooser(shareIntent, "Share image"))
         })
 
 

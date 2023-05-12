@@ -17,6 +17,8 @@
 
     <color name="statusBar">#65009688</color>
     <color name="bottomNav">#03524A</color>
+    <color name="appBackground">#246A73</color>
+    <color name="listItemBackground">#1D555D</color>
 
 
     <color name="premium_edit_text_background_color">#F3F3F3</color>
