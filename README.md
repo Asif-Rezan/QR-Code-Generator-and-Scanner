@@ -1,13 +1,13 @@
-|                                               |                                                |
-|-----------------------------------------------|------------------------------------------------|
-| ![Splash Screen](screenshot/screenshot_6.png) | ![Welcome Screen](screenshot/screenshot_5.png) |
+|                                                         |                                              |
+|---------------------------------------------------------|----------------------------------------------|
+| ![Download to the device](screenshots/screenshot_6.png) | ![Generate QR](screenshots/screenshot_5.png) |
 
-|                                          |                                         |
-|------------------------------------------|-----------------------------------------|
-| ![Delivery](screenshot/screenshot_4.png) | ![Grocery](screenshot/screenshot_3.png) |
+|                                                    |                                            |
+|----------------------------------------------------|--------------------------------------------|
+| ![Generated History](screenshots/screenshot_4.png) | ![Update QR](screenshots/screenshot_3.png) |
 
-|                                             |                                               |
-|---------------------------------------------|-----------------------------------------------|
-| ![Home Screen](screenshot/screenshot_2.png) | ![Category List](screenshot/screenshot_1.png) |
+|                                          |                                                                   |
+|------------------------------------------|-------------------------------------------------------------------|
+| ![Scan QR](screenshots/screenshot_2.png) | ![Copy and Direct search on google](screenshots/screenshot_1.png) |
 
 
