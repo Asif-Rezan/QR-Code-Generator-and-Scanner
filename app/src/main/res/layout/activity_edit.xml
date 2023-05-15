@@ -1,90 +1,117 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333">
+    android:background="#246A73">
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/titleEditText"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@id/image_view"-->
-    <!--        android:layout_marginHorizontal="10dp"-->
-    <!--        android:hint="Enter Title"-->
-    <!--        android:maxLines="1"-->
-    <!--        android:maxLength="30"-->
-    <!--        android:textColorHint="#BEBEBE"-->
-    <!--        android:textColor="@color/black"-->
-    <!--        android:background="@drawable/premium_edit_text_background"-->
-    <!--        android:padding="15dp"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/editText"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.5"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/image_view"-->
-    <!--        app:layout_constraintVertical_bias="0.5" />-->
 
-    <ImageView
-        android:id="@+id/image_view"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="40dp"
-        android:background="#EEEEEE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editText"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/image_view"
-        android:layout_marginHorizontal="10dp"
-
-        android:layout_marginTop="40dp"
-        android:background="@drawable/premium_edit_text_background"
-        android:hint="Enter Text"
-        android:inputType="textMultiLine"
-        android:maxLines="10"
-        android:minLines="3"
-        android:padding="16dp"
-        android:scrollbarStyle="insideInset"
-        android:scrollbars="vertical"
-
-        android:textColor="@color/black"
-        android:textColorHint="#BEBEBE"
-        app:layout_constraintTop_toBottomOf="@+id/image_view"
-        tools:layout_editor_absoluteX="9dp" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_background"
-        android:hint="#BEBEBE."
-        android:padding="0dp"
-        android:text="Update QR Code"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.179" />
+        android:layout_height="match_parent">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="@dimen/_290sdp"
+            android:layout_height="@dimen/_290sdp"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#2DFFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
 
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image_view"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/premium_edit_text_background"
+            android:hint="Enter Text"
+            android:inputType="textMultiLine"
+            android:maxLines="10"
+            android:minLines="3"
+            android:padding="16dp"
+            android:textColor="@color/white"
+
+            android:textColorHint="#BEBEBE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_background"
+            android:hint="#BEBEBE."
+            android:padding="0dp"
+            android:text="Generate QR Code"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintVertical_bias="0.179" />
+
+
+        <ImageView
+            android:id="@+id/shareButton"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/sharing"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <ImageView
+            android:id="@+id/downloadButton"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/download"
+            app:layout_constraintEnd_toStartOf="@+id/ratingButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/shareButton"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <ImageView
+            android:id="@+id/ratingButton"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_80sdp"
+            android:src="@drawable/star2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/_55sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ratingButton" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 
 
 
@@ -98,59 +125,64 @@
 <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
 <!--    xmlns:tools="http://schemas.android.com/tools"-->
 <!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="#333333">-->
+
+
 
 <!--    <ImageView-->
 <!--        android:id="@+id/image_view"-->
 <!--        android:layout_width="300dp"-->
 <!--        android:layout_height="300dp"-->
 <!--        android:layout_centerInParent="true"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/editText"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:background="#EEEEEE"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintHorizontal_bias="0.495"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--    <EditText-->
+<!--    <androidx.appcompat.widget.AppCompatEditText-->
 <!--        android:id="@+id/editText"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_below="@id/image_view"-->
 <!--        android:layout_marginHorizontal="10dp"-->
-<!--        android:layout_marginBottom="64dp"-->
-<!--        android:hint="Enter Text"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/button"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-<!--    <Button-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:background="@drawable/premium_edit_text_background"-->
+<!--        android:hint="Enter Text"-->
+<!--        android:inputType="textMultiLine"-->
+<!--        android:maxLines="10"-->
+<!--        android:minLines="3"-->
+<!--        android:padding="16dp"-->
+<!--        android:scrollbarStyle="insideInset"-->
+<!--        android:scrollbars="vertical"-->
+
+<!--        android:textColor="@color/black"-->
+<!--        android:textColorHint="#BEBEBE"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/image_view"-->
+<!--        tools:layout_editor_absoluteX="9dp" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
 <!--        android:id="@+id/button"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_below="@+id/editText"-->
 <!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginBottom="216dp"-->
-<!--        android:text="Genarate QR Code"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:background="@drawable/button_background"-->
+<!--        android:hint="#BEBEBE."-->
+<!--        android:padding="0dp"-->
+<!--        android:text="Update QR Code"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="16sp"-->
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.414"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/downloadButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/editText"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginBottom="148dp"-->
-<!--        android:text="Download"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.412"-->
+<!--        app:layout_constraintHorizontal_bias="0.496"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/button"-->
-<!--        app:layout_constraintVertical_bias="0.926" />-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/editText"-->
+<!--        app:layout_constraintVertical_bias="0.179" />-->
 
 
 <!--</androidx.constraintlayout.widget.ConstraintLayout>-->

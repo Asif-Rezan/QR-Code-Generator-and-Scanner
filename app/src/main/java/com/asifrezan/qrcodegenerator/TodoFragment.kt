@@ -1,11 +1,14 @@
 package com.asifrezan.qrcodegenerator
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.appsearch.SetSchemaRequest.READ_EXTERNAL_STORAGE
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.media.MediaScannerConnection
@@ -23,6 +26,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.asifrezan.qrcodegenerator.data.MyData
@@ -38,7 +42,9 @@ import java.time.LocalDateTime
 class TodoFragment : Fragment() {
 
     private var myData: MyData? = null
-    lateinit var bitmap: Bitmap
+    //lateinit var bitmap: Bitmap
+    var bitmap: Bitmap? = null
+    var generated_code = false
     lateinit var ratingButton : ImageView
 
     companion object {
@@ -108,6 +114,7 @@ class TodoFragment : Fragment() {
                 val barcodeEncoder = BarcodeEncoder()
                 bitmap = barcodeEncoder.encodeBitmap(contents, format, 1000, 1000)
                 imageView.setImageBitmap(bitmap)
+                generated_code = true
             } catch (e: WriterException) {
                 e.printStackTrace()
                 Toast.makeText(context, "Failed to generate QR code", Toast.LENGTH_SHORT).show()
@@ -120,7 +127,18 @@ class TodoFragment : Fragment() {
         downloadButton.setOnClickListener(View.OnClickListener {
 
          //   val bitmap = takeScreenshot(imageView)
-            saveScreenshot(bitmap)
+            if (generated_code)
+            {
+                saveScreenshot(bitmap!!)
+
+            }
+            else
+            {
+                Toast.makeText(requireContext(), "Generate a code to download", Toast.LENGTH_SHORT).show()
+            }
+
+
+
 
         })
 
@@ -144,20 +162,72 @@ class TodoFragment : Fragment() {
 
 
         shareButton.setOnClickListener(View.OnClickListener {
-            val file = File(requireContext().externalCacheDir, "image.png")
+
+            if (generated_code)
+            {
+
+
+
+            val file = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "qr-code.png")
             val outputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             outputStream.flush()
             outputStream.close()
 
-// Create the intent to share the image
+            // Create the intent to share the image
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "image/png"
             val uri = FileProvider.getUriForFile(requireContext(), "${BuildConfig.APPLICATION_ID}.fileprovider", file)
             shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
 
-// Show the share sheet
+                // Get read permission for the content URI
+            context?.let {
+                try {
+                    val contentUri = FileProvider.getUriForFile(it, "${BuildConfig.APPLICATION_ID}.fileprovider", file)
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    intent.setDataAndType(contentUri, "image/png")
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+
+                    e.printStackTrace()
+                }
+            }
+
+            // Show the share sheet
             startActivity(Intent.createChooser(shareIntent, "Share image"))
+
+            }
+            else
+            {
+                Toast.makeText(requireContext(), "Generate a code to share", Toast.LENGTH_SHORT).show()
+            }
+
+
+
+
+
+
+
+
+//                val file = File(requireContext().externalCacheDir, "image.png")
+//                val outputStream = FileOutputStream(file)
+//                bitmap!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+//                outputStream.flush()
+//                outputStream.close()
+//
+//                // Create the intent to share the image
+//                val shareIntent = Intent(Intent.ACTION_SEND)
+//                shareIntent.type = "image/png"
+//                val uri = FileProvider.getUriForFile(requireContext(), "${BuildConfig.APPLICATION_ID}.fileprovider", file)
+//                shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+//
+//                // Show the share sheet
+//                startActivity(Intent.createChooser(shareIntent, "Share image"))
+
+
+
         })
 
 

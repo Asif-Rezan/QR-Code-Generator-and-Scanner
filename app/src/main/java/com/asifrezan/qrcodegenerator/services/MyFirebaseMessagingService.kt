@@ -41,7 +41,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
         val remoteView = RemoteViews("com.asifrezan.qrcodegenerator",R.layout.notification)
         remoteView.setTextViewText(R.id.notification_title, title)
         remoteView.setTextViewText(R.id.message,message)
-        remoteView.setImageViewResource(R.id.notification_image,R.drawable.add_icon)
+        remoteView.setImageViewResource(R.id.notification_image,R.mipmap.ic_launcher)
 
         return remoteView
     }
@@ -59,7 +59,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
 
         var builder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext,
             channelId)
-            .setSmallIcon(R.drawable.add_icon)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setAutoCancel(true)
             .setVibrate(longArrayOf(1000,1000,1000,1000))
             .setOnlyAlertOnce(true)

@@ -14,6 +14,7 @@
     <color name="accentColor">#FF4081</color>
     <color name="textColor">#212121</color>
     <color name="backgroundColor">#FFFFFF</color>
+    <color name="green">#4CAF50</color>
 
     <color name="statusBar">#65009688</color>
     <color name="bottomNav">#03524A</color>
